@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm">
+    <class name="database.entities.Ticket" table="ticket">
+        <id name="id" column="id" type="int">
+            <generator class="native"/>
+        </id>
+
+        <property name="classCode" column="classCode" type="string" not-null="true"/>
+        <property name="seat" column="sear" type="string" not-null="true"/>
+
+        <!-- Relationships -->
+        <many-to-one name="passenger" column="passengerId" class="database.entities.Passenger" not-null="true"/>
+    </class>
+</hibernate-mapping>

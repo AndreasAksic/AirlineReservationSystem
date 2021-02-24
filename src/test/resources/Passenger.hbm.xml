@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm">
+    <class name="database.entities.Passenger" table="passenger">
+        <id name="id" column="id" type="int">
+            <generator class="native"/>
+        </id>
+
+        <property name="lastName" column="lastName" type="string" not-null="true"/>
+        <property name="firstName" column="firstName" type="string" not-null="true"/>
+        <property name="age" column="age" type="int" not-null="true"/>
+        <property name="gender" column="gender" type="string" not-null="true"/>
+    </class>
+</hibernate-mapping>

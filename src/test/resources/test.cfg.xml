@@ -22,6 +22,7 @@
         </property>
 
         <!-- Hibernate mapping files (*.hbm.xml) -->
-
+        <mapping resource="Ticket.hbm.xml"/>
+        <mapping resource="Passenger.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
