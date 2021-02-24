@@ -44,16 +44,6 @@ public class MySQLConnector implements DatabaseConnector {
         return entityId;
     }
 
-//    public <T> List<T> loadAllDataForType(Class<T> type) {
-//        Session session = sessionFactory.openSession();
-//
-//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
-//        criteriaQuery.from(type);
-//
-//        return session.createQuery(criteriaQuery).list();
-//    }
-
     public <T> List<T> loadAllDataForType(Class<T> type) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
@@ -79,18 +69,6 @@ public class MySQLConnector implements DatabaseConnector {
 
         return Collections.emptyList();
     }
-
-//    public <T> T loadForTypeWithId(Class<T> type, Integer id) {
-//        Session session = sessionFactory.openSession();
-//
-//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
-//        Root<T> root = criteriaQuery.from(type);
-//        Predicate predicate = criteriaBuilder.equal(root.get("id"), id);
-//        criteriaQuery.where(predicate);
-//
-//        return session.createQuery(criteriaQuery).getSingleResult();
-//    }
 
     public  <T> T loadForTypeWithId(Class<T> type, Integer id) {
         Session session = sessionFactory.openSession();
