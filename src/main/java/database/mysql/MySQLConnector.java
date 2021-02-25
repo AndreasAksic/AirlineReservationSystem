@@ -33,10 +33,7 @@ public class MySQLConnector implements DatabaseConnector {
 
             transaction.commit();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
+            handleHibernateException(transaction, e);
         } finally {
             session.close();
         }
@@ -59,10 +56,7 @@ public class MySQLConnector implements DatabaseConnector {
 
             return session.createQuery(criteriaQuery).list();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
+            handleHibernateException(transaction, e);
         } finally {
             session.close();
         }
@@ -70,31 +64,40 @@ public class MySQLConnector implements DatabaseConnector {
         return Collections.emptyList();
     }
 
-    public  <T> T loadForTypeWithId(Class<T> type, Integer id) {
+    public <T> T loadForTypeWithId(Class<T> type, Integer id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
 
         try {
             transaction = session.beginTransaction();
 
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
-            Root<T> root = criteriaQuery.from(type);
-            Predicate predicate = criteriaBuilder.equal(root.get("id"), id);
-            criteriaQuery.where(predicate);
+            CriteriaQuery<T> criteriaQuery = createCriteriaQueryForTypeAndId(type, id, session);
 
             transaction.commit();
 
             return session.createQuery(criteriaQuery).getSingleResult();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
+            handleHibernateException(transaction, e);
         } finally {
             session.close();
         }
 
         return null;
+    }
+
+    private <T> CriteriaQuery<T> createCriteriaQueryForTypeAndId(Class<T> type, Integer id, Session session) {
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
+        Root<T> root = criteriaQuery.from(type);
+        Predicate predicate = criteriaBuilder.equal(root.get("id"), id);
+        criteriaQuery.where(predicate);
+        return criteriaQuery;
+    }
+
+    private void handleHibernateException(Transaction transaction, HibernateException e) {
+        if (transaction != null) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
     }
 }

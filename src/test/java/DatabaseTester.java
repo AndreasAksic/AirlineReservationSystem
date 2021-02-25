@@ -54,17 +54,15 @@ public class DatabaseTester {
         connector.persistObject(passenger);
         connector.persistObject(ticket);
 
-        List<?> passengerList = connector.loadAllDataForType(passenger.getClass());
-        List<?> ticketList = connector.loadAllDataForType(ticket.getClass());
+        List<? extends Passenger> passengerList = connector.loadAllDataForType(passenger.getClass());
+        List<? extends Ticket> ticketList = connector.loadAllDataForType(ticket.getClass());
 
         for (Object o : passengerList) {
-            Passenger currentPassenger = (Passenger) o;
-            currentPassenger.print();
+            ((Passenger) o).print();
         }
 
         for (Object o : ticketList) {
-            Ticket currentTicket = (Ticket) o;
-            currentTicket.print();
+            ((Ticket) o).print();
         }
     }
 }
