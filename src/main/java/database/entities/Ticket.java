@@ -6,13 +6,15 @@ public class Ticket {
     private String seat;
 
     private Passenger passenger;
+    private Flight flight;
 
     public Ticket() {}
 
-    public Ticket(String classCode, String seat, Passenger passenger) {
+    public Ticket(String classCode, String seat, Passenger passenger, Flight flight) {
         this.classCode = classCode;
         this.seat = seat;
         this.passenger = passenger;
+        this.flight = flight;
     }
 
     public void setId(int id) {
@@ -31,6 +33,10 @@ public class Ticket {
         this.passenger = passenger;
     }
 
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
     public int getId() {
         return id;
     }
@@ -47,11 +53,15 @@ public class Ticket {
         return passenger;
     }
 
+    public Flight getFlight() {
+        return flight;
+    }
+
     public void print() {
         System.out.println(this.representation());
     }
 
     public String representation() {
-        return "[" + id + " - " + classCode + " - " + seat + " - " + passenger.getId() + "]";
+        return "[" + id + " - " + classCode + " - " + seat + " - " + passenger.getId() + " - " + flight.getId() + "]";
     }
 }

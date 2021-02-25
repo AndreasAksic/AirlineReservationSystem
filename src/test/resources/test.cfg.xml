@@ -24,5 +24,6 @@
         <!-- Hibernate mapping files (*.hbm.xml) -->
         <mapping resource="Ticket.hbm.xml"/>
         <mapping resource="Passenger.hbm.xml"/>
+        <mapping resource="Flight.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

@@ -14,5 +14,6 @@
 
         <!-- Relationships -->
         <many-to-one name="passenger" column="passengerId" class="database.entities.Passenger" not-null="true"/>
+        <many-to-one name="flight" column="flightId" class="database.entities.Flight" not-null="true"/>
     </class>
 </hibernate-mapping>
